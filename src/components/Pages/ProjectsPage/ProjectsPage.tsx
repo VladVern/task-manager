@@ -11,14 +11,13 @@ function ProjectsPage() {
     
     const projects = useProjectsState(state => state.projects)
 
-    
     const deleteProject = useProjectsState(state => state.deleteProject)
 
     return (
         <section className="projects">
             <div className="projects-create">
                 <h1 className="projects-create-title">My projects</h1>
-                <button onClick={() => setIsModalOpen(state => !state)} className="projects-create-button">+ New project</button>
+                <button onClick={() => setIsModalOpen(true)} className="projects-create-button">+ New project</button>
                 {/* Modal window */}
             </div>
 
@@ -41,7 +40,7 @@ function ProjectsPage() {
                 }
             </div>
 
-            <CreateProjectModal isOpen={isModalOpen}></CreateProjectModal>
+            <CreateProjectModal isOpen={isModalOpen} closeModal={() => setIsModalOpen(false)}></CreateProjectModal>
         </section>
     )
 }

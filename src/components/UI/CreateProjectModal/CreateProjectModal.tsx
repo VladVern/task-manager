@@ -1,39 +1,64 @@
 import { useRef } from 'react'
 
+import './style.css'
+
+import X from '../../../media/img/x.png'
+
 import useProjectsState from '../../state/useProjectsState'
 
 import type { Props } from '../../type/CreateProjectModal'
 
-function CreateProjectModal({ isOpen }: Props) {
-    function createProjectButton() {
-        if (!inputName.current?.value || !inputDescription.current?.value) {
-            return
-        }
 
-        createProject(inputName.current?.value, inputDescription.current?.value)
-    }
-
+function CreateProjectModal({ isOpen, closeModal }: Props) {
     const createProject = useProjectsState(state => state.createProject)
 
     const inputName = useRef<HTMLInputElement>(null)
     const inputDescription = useRef<HTMLInputElement>(null)
 
+    function createProjectButton(inputName: undefined | string, inputDescription: undefined | string) {
+        if (!inputName || !inputDescription) {
+            return
+            // Thow error message
+        }
+
+        createProject(inputName, inputDescription)
+    }
 
     let display = 'none'
 
+    document.body.style.overflow = 'auto'
+    document.body.style.paddingRight = '0px'
+
     if (isOpen) {
-        display = 'block'
+        display = 'flex'
+
+        document.body.style.overflow = 'hidden'
+        document.body.style.paddingRight = '17px'
     }
 
+
     return (
-        <section style={{ display: display }} className='create-project-modal'>
-            <h1>Create project</h1>
-            <label htmlFor="create-project">
-                <input id='create-project' ref={inputName} type="text" placeholder='Write name' />
-                <input id='create-project' ref={inputDescription} type="text" placeholder='Write description' />
-                <button onClick={() => createProjectButton()} id='create-project'>Create</button>
-            </label>
-        </section>
+        <>
+            <section style={{ display: display }} className='create-project-modal'>
+                <img src={X} alt="X" onClick={closeModal} />
+                
+                <h1>Create project</h1>
+
+                <label htmlFor="create-project">
+                    <input id='create-project' ref={inputName} type="text" placeholder='Write name' />
+                    <input id='create-project' ref={inputDescription} type="text" placeholder='Write description' />
+                    <button onClick={() => {
+                        createProjectButton(inputName.current?.value, inputDescription.current?.value)
+                        inputName.current!.value = ''
+                        inputDescription.current!.value = ''
+                        closeModal()
+                    }} id='create-project'>Create</button>
+                </label>
+
+            </section>
+
+            <div onClick={closeModal} style={{ display: display }} className="create-project-modal-overlay"></div>
+        </>
     )
 }
 

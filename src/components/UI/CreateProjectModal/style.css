@@ -1,0 +1,77 @@
+:root {
+    --button-background-color: #447566;
+    --background-color: #ffffff;
+}
+
+.create-project-modal {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    z-index: 2;
+
+    width: 500px;
+    height: 250px;
+
+    background-color: var(--background-color);
+
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    gap: 20px;
+}
+
+.create-project-modal img {
+    width: 50px;
+    height: 50px;
+
+    top: 0;
+    right: 0;
+
+    position: absolute;
+
+    cursor: pointer;
+}
+
+.create-project-modal label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    gap: 20px;
+}
+
+.create-project-modal label input {
+    width: 300px;
+    height: 40px;
+}
+
+.create-project-modal label button {
+    width: 140px;
+    height: 50px;
+
+    color: var(--button-text-color);
+
+    border: none;
+    border-radius: 10px;
+
+    background-color: var(--button-background-color);
+
+    cursor: pointer;
+}
+
+.create-project-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+
+    background: rgba(0, 0, 0, 0.5);
+}
