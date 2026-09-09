@@ -4,6 +4,11 @@ import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
 const useProjectsState = create<State>()(persist((set, get) => ({
+    selectedProject: {
+        projectName: null,
+        projectId: null
+    },
+
     projects: [],
 
     createProject(name, description) {
@@ -28,7 +33,19 @@ const useProjectsState = create<State>()(persist((set, get) => ({
         set(state => ({
             projects: state.projects.filter(el => el.projectId !== id)
         }))
-    }
+    },
+    selectProject(id) {
+        set(state => {
+            const project = state.projects.find(project => project.projectId === id)
+
+            return {
+                selectedProject: {
+                    projectName: project?.projectName ?? null,
+                    projectId: project?.projectId ?? null
+                }
+            }
+        })
+    },
 }), {
     name: 'projects-state'
 }))

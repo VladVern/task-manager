@@ -3,8 +3,10 @@ import { Routes, Route, Navigate} from 'react-router'
 import './style.css'
 
 import ProjectsPage from '../components/Pages/ProjectsPage/ProjectsPage'
+import ProjectPage from '../components/Pages/ProjectPage/ProjectPage'
 
 function App() {
+    
     return (
         <>
             <section className='navigation'>
@@ -14,7 +16,7 @@ function App() {
 
             <Routes>
                 <Route path="/projects" element={<ProjectsPage />} />
-                {/* <Route path="/custom name" element={<Project />} /> */}
+                <Route path="/projects/:projectId" element={<ProjectPage />} />
                 <Route path="*" element={<Navigate to="/projects" />} />
             </Routes>
         </>

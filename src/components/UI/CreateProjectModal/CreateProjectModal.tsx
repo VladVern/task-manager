@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useEffect } from 'react'
 
 import './style.css'
 
@@ -8,12 +8,28 @@ import useProjectsState from '../../state/useProjectsState'
 
 import type { Props } from '../../type/CreateProjectModal'
 
-
 function CreateProjectModal({ isOpen, closeModal }: Props) {
     const createProject = useProjectsState(state => state.createProject)
 
     const inputName = useRef<HTMLInputElement>(null)
     const inputDescription = useRef<HTMLInputElement>(null)
+
+    useEffect(() => {
+        const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth
+
+        if (isOpen) {
+            document.body.style.overflow = 'hidden'
+            document.body.style.paddingRight = `${scrollBarWidth}px`
+        } else {
+            document.body.style.overflow = 'auto'
+            document.body.style.paddingRight = '0px'
+        }
+
+        return () => {
+            document.body.style.overflow = 'auto'
+            document.body.style.paddingRight = '0px'
+        }
+    }, [isOpen])
 
     function createProjectButton(inputName: undefined | string, inputDescription: undefined | string) {
         if (!inputName || !inputDescription) {
@@ -24,24 +40,11 @@ function CreateProjectModal({ isOpen, closeModal }: Props) {
         createProject(inputName, inputDescription)
     }
 
-    let display = 'none'
-
-    document.body.style.overflow = 'auto'
-    document.body.style.paddingRight = '0px'
-
-    if (isOpen) {
-        display = 'flex'
-
-        document.body.style.overflow = 'hidden'
-        document.body.style.paddingRight = '17px'
-    }
-
-
     return (
         <>
-            <section style={{ display: display }} className='create-project-modal'>
+            <section style={{ display: isOpen ? 'flex' : 'none' }} className='create-project-modal'>
                 <img src={X} alt="X" onClick={closeModal} />
-                
+
                 <h1>Create project</h1>
 
                 <label htmlFor="create-project">
@@ -57,7 +60,7 @@ function CreateProjectModal({ isOpen, closeModal }: Props) {
 
             </section>
 
-            <div onClick={closeModal} style={{ display: display }} className="create-project-modal-overlay"></div>
+            <div onClick={closeModal} style={{ display: isOpen ? 'flex' : 'none' }} className="create-project-modal-overlay"></div>
         </>
     )
 }

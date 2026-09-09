@@ -4,7 +4,6 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom';
 
 import '../components/styles/Global/style.css'
-import './style.css'
 
 import App from '../App/App'
 

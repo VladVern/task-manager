@@ -17,8 +17,15 @@ type Project = {
     projectTasks: Task[]
 }
 
+type SelectedProject = {
+    projectName: null | string,
+    projectId: null | string
+}
+
 export type State = {
+    selectedProject: SelectedProject,
     projects: Project[],
-    createProject: (name: string, description: string) => void
-    deleteProject: (id: string) => void
+    createProject: (name: string, description: string) => void,
+    deleteProject: (id: string) => void,
+    selectProject: (id: string) => void
 }   
