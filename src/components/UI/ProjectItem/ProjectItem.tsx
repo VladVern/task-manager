@@ -15,6 +15,7 @@ function ProjectItem({ id, name, description, openProject, deleteProject }: Prop
 
             <div className="projects-list-item-buttons">
                 <button onClick={() => deleteProject(id)}><img src={Trash}></img></button>
+                {/* Modal is delete project? */}
                 <button onClick={() => openProject(id)}><img src={Arrow}></img></button>
             </div>
         </div>

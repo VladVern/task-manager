@@ -32,7 +32,7 @@ function CreateProjectModal({ isOpen, closeModal }: Props) {
     }, [isOpen])
 
     function createProjectButton(inputName: undefined | string, inputDescription: undefined | string) {
-        if (!inputName || !inputDescription) {
+        if (!inputName || !inputDescription || inputName.length >= 50 || inputDescription.length >= 240) {
             return
             // Thow error message
         }

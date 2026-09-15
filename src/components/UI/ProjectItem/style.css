@@ -47,9 +47,12 @@
     margin-top: 6px;
 
     font-size: 25px;
-    font-weight: 700;
     color: var(--list-text-name-color);
     line-height: 1.2;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    overflow: hidden;
 }
 
 .projects-list-item-texts p {
