@@ -3,7 +3,8 @@ import { createRoot } from 'react-dom/client'
 
 import { BrowserRouter } from 'react-router-dom';
 
-import '../components/styles/Global/style.css'
+import '../components/styles/global.css'
+import '../components/styles/variables.css'
 
 import App from '../App/App'
 

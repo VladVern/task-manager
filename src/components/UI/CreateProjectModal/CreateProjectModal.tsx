@@ -2,7 +2,7 @@ import { useRef, useEffect } from 'react'
 
 import './style.css'
 
-import X from '../../../media/img/x.png'
+import X from '../../../media/img/x.svg'
 
 import useProjectsState from '../../state/useProjectsState'
 
@@ -10,6 +10,8 @@ import type { Props } from '../../type/CreateProjectModal'
 
 function CreateProjectModal({ isOpen, closeModal }: Props) {
     const createProject = useProjectsState(state => state.createProject)
+
+    const toggleMessageError = useProjectsState(state => state.toggleMessageError)
 
     const inputName = useRef<HTMLInputElement>(null)
     const inputDescription = useRef<HTMLInputElement>(null)
@@ -32,12 +34,17 @@ function CreateProjectModal({ isOpen, closeModal }: Props) {
     }, [isOpen])
 
     function createProjectButton(inputName: undefined | string, inputDescription: undefined | string) {
-        if (!inputName || !inputDescription || inputName.length >= 50 || inputDescription.length >= 240) {
-            return
-            // Thow error message
+        if (!inputName || !inputDescription) {
+            toggleMessageError('Write name and description')
+            return false
         }
+        if (inputName.length >= 240 || inputDescription.length >= 240) {
+            toggleMessageError('Text must not exceed 240 characters')
+            return false
+        }                    
 
         createProject(inputName, inputDescription)
+        return true
     }
 
     return (
@@ -51,7 +58,9 @@ function CreateProjectModal({ isOpen, closeModal }: Props) {
                     <input id='create-project' ref={inputName} type="text" placeholder='Write name' />
                     <input id='create-project' ref={inputDescription} type="text" placeholder='Write description' />
                     <button onClick={() => {
-                        createProjectButton(inputName.current?.value, inputDescription.current?.value)
+                        if (!createProjectButton(inputName.current?.value, inputDescription.current?.value)) {
+                            return
+                        }
                         inputName.current!.value = ''
                         inputDescription.current!.value = ''
                         closeModal()

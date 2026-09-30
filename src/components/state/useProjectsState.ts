@@ -1,3 +1,4 @@
+import { isAction } from '@reduxjs/toolkit'
 import type { State } from '../type/ProjectState'
 
 import { create } from 'zustand'
@@ -7,8 +8,6 @@ const useProjectsState = create<State>()(persist((set, get) => ({
     selectedProject: {
         projectId: null
     },
-
-    projects: [],
 
     selectProject(id) {
         set(state => {
@@ -22,8 +21,10 @@ const useProjectsState = create<State>()(persist((set, get) => ({
         })
     },
 
+    projects: [],
+
     createProject(name, description) {
-        if (!name || !description || name.length >= 50 || description.length >= 240) {
+        if (!name || !description || name.length >= 240 || description.length >= 240) {
             return
         }
 
@@ -46,7 +47,7 @@ const useProjectsState = create<State>()(persist((set, get) => ({
         }))
     },
     updateProject(id, name, description) {
-        if (!id || !name || !description || name.length >= 50 || description.length >= 240) {
+        if (!id || !name || !description || name.length >= 240 || description.length >= 240) {
             return
         }
 
@@ -69,16 +70,67 @@ const useProjectsState = create<State>()(persist((set, get) => ({
     },
 
     createTask(id, task) {
+        if (!id || !task) {
+            return
+        }
 
+        const projects = get().projects.map(el => {
+            if (el.projectId === id) {
+                el.projectTasks.push({
+                    taskId: crypto.randomUUID(),
+                    ...task
+                })
+
+                return el
+            } else {
+                return el
+            }
+        })
+
+        set(() => ({
+            projects: [...projects]
+        }))
     },
     deleteTask(id, task) {
-
+        if (!id || !task) {
+            return
+        }
     },
     updateTask(id, task) {
-
+        if (!id || !task) {
+            return
+        }
     },
+
+    errorMessage: {
+        errorMessage: '',
+        isActive: false
+    },
+
+    toggleMessageError: async (message) => {
+        set(() => ({
+            errorMessage: {
+                errorMessage: message,
+                isActive: true
+            }
+        }))
+
+        await new Promise(res => setTimeout(res, 5000))
+
+        set(() => ({
+            errorMessage: {
+                errorMessage: '',
+                isActive: false
+            }
+        }))
+    }
 }), {
-    name: 'projects-state'
+    name: 'projects-state',
+
+    partialize: (state) => ({
+        projects: state.projects,
+        selectedProject: state.selectedProject
+    })
 }))
 
 export default useProjectsState

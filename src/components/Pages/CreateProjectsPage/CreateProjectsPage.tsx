@@ -4,10 +4,10 @@ import { useNavigate } from 'react-router-dom'
 import './style.css'
 
 import useProjectsState from '../../state/useProjectsState'
-import ProjectItem from '../../UI/ProjectItem/ProjectItem'
+import ProjectListItem from '../../UI/ProjectListItem/ProjectListItem'
 import CreateProjectModal from '../../UI/CreateProjectModal/CreateProjectModal'
 
-function ProjectsPage() {
+function CreateProjectsPage() {
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
 
     const navigate = useNavigate()
@@ -32,7 +32,7 @@ function ProjectsPage() {
                 {
                     projects.length ? (
                         projects.map(el => (
-                            <ProjectItem
+                            <ProjectListItem
                                 key={el.projectId}
                                 id={el.projectId}
                                 name={el.projectName}
@@ -52,4 +52,4 @@ function ProjectsPage() {
     )
 }
 
-export default ProjectsPage
+export default CreateProjectsPage

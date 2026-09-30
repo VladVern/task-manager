@@ -1,9 +1,3 @@
-:root {
-    --button-background-color: #447566;
-    --button-text-color: #ffffff;
-    --text-color: #000006;
-}
-
 .projects {
     display: flex;
     align-items: center;

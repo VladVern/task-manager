@@ -1,0 +1,18 @@
+:root {
+    --button-background-color: #447566;
+    --button-text-color: #ffffff;
+
+    --button-delete-background-color: #5a1c07;
+
+    --background-color: #ffffff;
+
+    --list-background-color: #e8eeee;
+    --list-text-name-color: #0d1b2a;
+    --list-text-description-color: #64748b;
+    --line-color: #00a896;
+
+    --text-color: #000006;
+
+    --error-background-color: #880c0c27;
+    --error-text-color: #810404;
+}
