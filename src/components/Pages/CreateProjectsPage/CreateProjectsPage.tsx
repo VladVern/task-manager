@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom'
 
 import './style.css'
 
-import useProjectsState from '../../state/useProjectsState'
-import ProjectListItem from '../../UI/ProjectListItem/ProjectListItem'
-import CreateProjectModal from '../../UI/CreateProjectModal/CreateProjectModal'
+import useProjectsState from '../../shared/state/useProjectsState'
+import ProjectListItem from './ui/ProjectListItem/ProjectListItem'
+import CreateProjectModal from './ui/CreateProjectModal/CreateProjectModal'
 
 function CreateProjectsPage() {
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false)

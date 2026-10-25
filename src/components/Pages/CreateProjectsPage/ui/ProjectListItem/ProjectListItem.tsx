@@ -2,11 +2,11 @@ import { useState } from 'react'
 
 import './style.css'
 
-import Arrow from '../../../media/img/chevron-right.svg'
-import Trash from '../../../media/img/trash.svg'
+import Arrow from '../../../../../assets/img/chevron-right.svg'
+import Trash from '../../../../../assets/img/trash.svg'
 
-import type { Props } from '../../type/ProjectItem'
-import DeleteModal from '../DeleteModal/DeleteModal'
+import type { Props } from './type'
+import DeleteModal from '../../../../shared/ui/DeleteModal/DeleteModal'
 
 function ProjectListItem({ id, name, description, openProject, deleteProject }: Props) {
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false)

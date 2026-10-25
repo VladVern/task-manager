@@ -1,4 +1,4 @@
-import type { Task } from '../type/ProjectState'
+import type { Task } from '../../../../shared/type/ProjectState'
 
 export type Props = {
     isOpen: boolean,

@@ -1,9 +1,9 @@
 import { Routes, Route, Navigate} from 'react-router'
 
-import useProjectsState from '../components/state/useProjectsState'
+import useProjectsState from '../components/shared/state/useProjectsState'
 import CreateProjectsPage from '../components/Pages/CreateProjectsPage/CreateProjectsPage'
 import ProjectPage from '../components/Pages/ProjectPage/ProjectPage'
-import ErrorMessage from '../components/UI/ErrorMessage/ErrorMessage'
+import ErrorMessage from '../components/shared/ui/ErrorMessage/ErrorMessage'
 
 function App() {
     const errorMessage = useProjectsState(state => state.errorMessage.errorMessage)

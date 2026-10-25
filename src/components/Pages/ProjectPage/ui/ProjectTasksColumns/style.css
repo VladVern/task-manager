@@ -1,0 +1,12 @@
+.project-tasks {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.project-tasks-column {
+    min-height: 500px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}

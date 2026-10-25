@@ -1,0 +1,12 @@
+.task {
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    cursor: grab;
+    background: white;
+}
+
+.task:active {
+    cursor: grabbing;
+}

@@ -2,9 +2,9 @@ import { useEffect } from 'react'
 
 import './style.css'
 
-import X from '../../../media/img/x.svg'
+import X from '../../../../assets/img/x.svg'
 
-import type { Props } from '../../type/DeleteModal'
+import type { Props } from './type'
 
 function DeleteProjectModal({ title, isOpen, closeModal, deleteFunction }: Props) {
     useEffect(() => {

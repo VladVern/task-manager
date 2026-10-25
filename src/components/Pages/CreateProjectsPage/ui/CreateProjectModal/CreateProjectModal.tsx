@@ -2,11 +2,11 @@ import { useRef, useEffect } from 'react'
 
 import './style.css'
 
-import X from '../../../media/img/x.svg'
+import X from '../../../../../assets/img/x.svg'
 
-import useProjectsState from '../../state/useProjectsState'
+import useProjectsState from '../../../../shared/state/useProjectsState'
 
-import type { Props } from '../../type/CreateProjectModal'
+import type { Props } from './type'
 
 function CreateProjectModal({ isOpen, closeModal }: Props) {
     const createProject = useProjectsState(state => state.createProject)

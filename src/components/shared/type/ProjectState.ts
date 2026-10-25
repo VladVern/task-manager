@@ -1,45 +1,45 @@
 export type TaskPriority = 'low' | 'medium' | 'high'
 
-type TaskType = 'to-do' | 'in-progress' | 'done'
+export type TaskStatus = 'to-do' | 'in-progress' | 'done'
 
 export type Task = {
     taskId: string,
     title: string,
     description: string,
-    type: TaskType,
     priority: TaskPriority
 }
 
-type Project = {
+export type TaskGroup = {
+    status: TaskStatus,
+    tasks: Task[]
+}
+
+export type Project = {
     projectId: string,
     projectName: string,
     projectDescription: string,
-    projectTasks: Task[]
+    projectTasks: TaskGroup[]
 }
-
-type SelectedProject = {
+export type SelectedProject = {
     projectId: null | string
 }
 
 export type State = {
     selectedProject: SelectedProject,
+    selectProject: (id: string) => void,
     
     projects: Project[],
-
-    selectProject: (id: string) => void,
-
     createProject: (name: string, description: string) => void,
     deleteProject: (id: string) => void,
     updateProject: (id: string, name: string, description: string) => void
 
-    createTask: (id: string, task: Omit<Task, 'taskId'>) => void,
-    deleteTask: (id: string, task: Pick<Task, 'taskId'>) => void,
-    updateTask: (id: string, task: Task) => void,
+    createTask: (projectId: string, task: Omit<Task, 'taskId'>) => void,
+    deleteTask: (projectId: string, taskId: string, task: Pick<Task, 'taskId'>) => void,
+    updateTask: (projectId: string, taskId: string, task: Task, status: 'to-do' | 'in-progress' | 'done' | null) => void,
 
     errorMessage: {
         isActive: boolean,
         errorMessage: string
     },
-
     toggleMessageError: (message: string) => void
 }   

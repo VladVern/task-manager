@@ -2,11 +2,11 @@ import { useState, useRef, useEffect } from 'react'
 
 import './style.css'
 
-import X from '../../../media/img/x.svg'
+import X from '../../../../../assets/img/x.svg'
 
-import type { Props } from '../../type/CreateTaskModal'
-import type { TaskPriority } from '../../type/ProjectState'
-import useProjectsState from '../../state/useProjectsState'
+import type { Props } from './type'
+import type { TaskPriority } from '../../../../shared/type/ProjectState'
+import useProjectsState from '../../../../shared/state/useProjectsState'
 
 function CreateTaskModal({ isOpen, closeModal, createTask }: Props) {
     const inputTitle = useRef<HTMLInputElement>(null)
@@ -49,8 +49,7 @@ function CreateTaskModal({ isOpen, closeModal, createTask }: Props) {
         createTask({
             title: inputTitle,
             description: inputDescription,
-            priority: inputPriority,
-            type: 'to-do'
+            priority: inputPriority
         })
 
         return true
