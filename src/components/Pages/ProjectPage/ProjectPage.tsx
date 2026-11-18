@@ -28,8 +28,6 @@ function ProjectPage() {
         }
     }
 
-    const deleteProject = useProjectsState(state => state.deleteProject)
-
     return (
         <section className="project">
             {/* <button onClick={() => deleteProject(selectedProject!.projectId)}>delete</button> */}
