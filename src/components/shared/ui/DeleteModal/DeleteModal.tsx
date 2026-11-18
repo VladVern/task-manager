@@ -2,44 +2,55 @@ import { useEffect } from 'react'
 
 import './style.css'
 
-import X from '../../../../assets/img/x.svg'
-
 import type { Props } from './type'
 
-function DeleteProjectModal({ title, isOpen, closeModal, deleteFunction }: Props) {
+import X from '../../../../assets/img/x.svg'
+
+function DeleteModal({ title, buttonText, isOpen, closeModal, deleteFunction }: Props) {
+    // Logic hide/show scroll bar
     useEffect(() => {
         const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth
 
         if (isOpen) {
-            document.body.style.overflow = 'hidden'
+            document.body.style.overflowY = 'hidden'
             document.body.style.paddingRight = `${scrollBarWidth}px`
         } else {
-            document.body.style.overflow = 'auto'
+            document.body.style.overflowY = 'auto'
             document.body.style.paddingRight = '0px'
         }
 
         return () => {
-            document.body.style.overflow = 'auto'
+            document.body.style.overflowY = 'auto'
             document.body.style.paddingRight = '0px'
         }
     }, [isOpen])
 
     return (
         <>
-            <section style={{ display: isOpen ? 'flex' : 'none' }} className='delete-project-modal'>
+            <section style={{ display: isOpen ? 'flex' : 'none' }} className='delete-project-modal modal'>
+                {/* Close modal */}
                 <img src={X} alt="X" onClick={closeModal} />
 
-                <h1>Delete {title}?</h1>
-                <button onClick={() => {
-                    deleteFunction()
-                    closeModal()
-                }}>Delete</button>
+                {/* Title and Delete button */}
+                <h1>{title}</h1>
+                <button
+                    onClick={() => {
+                        deleteFunction()
+                        closeModal()
+                    }}>
+                    {buttonText}
+                </button>
 
             </section>
 
-            <div onClick={closeModal} style={{ display: isOpen ? 'flex' : 'none' }} className="delete-project-modal-overlay"></div>
+            {/* Black background */}
+            <div
+                onClick={closeModal}
+                style={{ display: isOpen ? 'flex' : 'none' }}
+                className="delete-project-modal-overlay"
+            />
         </>
     )
 }
 
-export default DeleteProjectModal
+export default DeleteModal

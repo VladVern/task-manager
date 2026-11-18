@@ -5,58 +5,110 @@ import { useState } from 'react'
 import type { TaskStatus } from '../../../../shared/type/ProjectState'
 
 import useProjectsState from '../../../../shared/state/useProjectsState'
+
 import ProjectTaskColumnsItem from './ui/ProjectTaskColumnsItem/ProjectTaskColumnsItem'
+import DeleteModal from '../../../../shared/ui/DeleteModal/DeleteModal'
+import EditTaskModal from './ui/EditTaskModal/EditTaskModal'
+import useTaskDrag from './hook/useTaskDrag'
+
+// 3 columns of tasks
+const COLUMNS: { status: TaskStatus, title: string, className: string }[] = [
+    { status: 'to-do', title: 'To Do', className: 'project-tasks-to-do' },
+    { status: 'in-progress', title: 'In Progress', className: 'project-tasks-in-progress' },
+    { status: 'done', title: 'Done', className: 'project-tasks-done' },
+]
 
 function ProjectTasksColumns() {
+    // Selected project task list
     const selectedProject = useProjectsState(state => state.projects.find(el => el.projectId === state.selectedProject.projectId))
-    const tasksList = useProjectsState(state => state.projects.find(el => el.projectId === state.selectedProject.projectId)?.projectTasks)
+    const tasksList = selectedProject?.projectTasks
 
-    const [draggedTaskId, setDraggedTaskId] = useState<string | null>(null)
+    // State modals
+    const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false)
+    const [isOpenUpdateModal, setIsOpenUpdateModal] = useState(false)
+    const [updateModalProps, setUpdateModalProps] = useState({ projectId: '', taskId: '' })
+    const [deleteModalProps, setDeleteModalProps] = useState({ projectId: '', taskId: '' })
+
+    // Logic delete and update tasks
+    const deleteTask = useProjectsState(state => state.deleteTask)
     const updateTask = useProjectsState(state => state.updateTask)
-    function handleDragStart(taskId: string) {
-        setDraggedTaskId(taskId)
-    }
-    function handleDragOver(e: React.DragEvent) {
-        e.preventDefault()
-    }
-    function handleDrop(status: TaskStatus) {
-        if (!draggedTaskId || !selectedProject || !tasksList) return
 
-        const task = tasksList.flatMap(group => group.tasks).find(task => task.taskId === draggedTaskId)
+    // Drag and Drop
+    const { draggedTaskId, overStatus, startDrag } = useTaskDrag((taskId: string, status: TaskStatus) => {
+        if (!selectedProject || !tasksList) {
+            return
+        }
 
-        if (!task) return
+        const task = tasksList.flatMap(group => group.tasks).find(t => t.taskId === taskId)
+        if (!task) {
+            return
+        }
 
-        updateTask(selectedProject.projectId, draggedTaskId, task, status)
-
-        setDraggedTaskId(null)
-    }
+        updateTask(selectedProject.projectId, taskId, task, status)
+    })
 
     return (
-        <div className="project-tasks">
-            <div className="project-tasks-column project-tasks-to-do" onDragOver={handleDragOver} onDrop={() => handleDrop('to-do')}>
-                <h2>To Do</h2>
+        <>
+            {/* 3 columns of tasks */}
+            <div className="project-tasks">
+                {COLUMNS.map(({ status, title, className }) => {
+                    const tasks = tasksList?.find(group => group.status === status)?.tasks
 
-                {tasksList?.find(group => group.status === 'to-do')?.tasks.map(task => (
-                    <ProjectTaskColumnsItem title={task.title} description={task.description} priority={task.priority} drag={() => handleDragStart(task.taskId)} key={task.taskId}></ProjectTaskColumnsItem>
-                ))}
+                    return (
+                        <div
+                            key={status}
+                            data-status={status}
+                            className={`project-tasks-column ${className} ${overStatus === status ? 'project-tasks-column--over' : ''}`}>
+
+                            <div className="project-tasks-column-title">
+                                <h2>{title}</h2>
+                                <div className="project-tasks-column-title-count"><p>{tasks?.length}</p></div>
+                            </div>
+
+                            <div className="project-tasks-column-line" />
+
+                            <div className="project-tasks-column-tasks">
+                                {tasks?.map(task => (
+                                    <ProjectTaskColumnsItem
+                                        key={task.taskId}
+                                        projectId={selectedProject!.projectId}
+                                        taskId={task.taskId}
+                                        title={task.title}
+                                        description={task.description}
+                                        priority={task.priority}
+                                        isDragging={draggedTaskId === task.taskId}
+                                        onDragStart={startDrag}
+                                        deleteButton={(projectId, taskId) => {
+                                            setDeleteModalProps({ projectId, taskId })
+                                            setIsOpenDeleteModal(true)
+                                        }}
+                                        updateButton={(projectId, taskId) => {
+                                            setUpdateModalProps({ projectId, taskId })
+                                            setIsOpenUpdateModal(true)
+                                        }}
+                                    />
+                                ))}
+                            </div>
+                        </div>
+                    )
+                })}
             </div>
 
-            <div className="project-tasks-column project-tasks-in-progress" onDragOver={handleDragOver} onDrop={() => handleDrop('in-progress')}>
-                <h2>In Progress</h2>
-
-                {tasksList?.find(group => group.status === 'in-progress')?.tasks.map(task => (
-                    <ProjectTaskColumnsItem title={task.title} description={task.description} priority={task.priority} drag={() => handleDragStart(task.taskId)} key={task.taskId}></ProjectTaskColumnsItem>
-                ))}
-            </div>
-
-            <div className="project-tasks-column project-tasks-done" onDragOver={handleDragOver} onDrop={() => handleDrop('done')}>
-                <h2>Done</h2>
-
-                {tasksList?.find(group => group.status === 'done')?.tasks.map(task => (
-                    <ProjectTaskColumnsItem title={task.title} description={task.description} priority={task.priority} drag={() => handleDragStart(task.taskId)} key={task.taskId}></ProjectTaskColumnsItem>
-                ))}
-            </div>
-        </div>
+            {/* Modals */}
+            <DeleteModal
+                title='Delete task?'
+                buttonText='Delete'
+                isOpen={isOpenDeleteModal}
+                closeModal={() => setIsOpenDeleteModal(false)}
+                deleteFunction={() => deleteTask(deleteModalProps.projectId, deleteModalProps.taskId)}
+            />
+            <EditTaskModal
+                isOpen={isOpenUpdateModal}
+                closeModal={() => setIsOpenUpdateModal(false)}
+                projectId={updateModalProps.projectId}
+                taskId={updateModalProps.taskId}
+            />
+        </>
     )
 }
 

@@ -4,30 +4,39 @@ import { useNavigate } from 'react-router-dom'
 import './style.css'
 
 import useProjectsState from '../../shared/state/useProjectsState'
+
 import ProjectListItem from './ui/ProjectListItem/ProjectListItem'
 import CreateProjectModal from './ui/CreateProjectModal/CreateProjectModal'
 
 function CreateProjectsPage() {
-    const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
+    // State Modal Create Project
+    const [isCreateProjectModalOpen, setIsCreateProjectModalOpen] = useState<boolean>(false)
 
-    const navigate = useNavigate()
-
+    // Logic navigation to Project page
     const selectProject = useProjectsState(state => state.selectProject)
-    const projects = useProjectsState(state => state.projects)
-    const deleteProject = useProjectsState(state => state.deleteProject)
-
+    const navigate = useNavigate()
     function changePage(id: string) {
         selectProject(id)
         navigate(`/projects/${id}`)
     }
 
+    // Project logic (show, delete)
+    const projects = useProjectsState(state => state.projects)
+    const deleteProject = useProjectsState(state => state.deleteProject)
+
     return (
         <section className="projects">
+            {/* Create project */}
             <div className="projects-create">
-                <h1 className="projects-create-title">My projects</h1>
-                <button onClick={() => setIsModalOpen(true)} className="projects-create-button">+ New project</button>
+                <div className="projects-create-title">
+                    <h1 className="projects-create-title">My projects</h1>
+                    <p>Manage your work</p>
+                </div>
+                
+                <button onClick={() => setIsCreateProjectModalOpen(true)} className="projects-create-button">+ New project</button>
             </div>
 
+            {/* List of projects */}
             <div className="projects-list">
                 {
                     projects.length ? (
@@ -47,7 +56,11 @@ function CreateProjectsPage() {
                 }
             </div>
 
-            <CreateProjectModal isOpen={isModalOpen} closeModal={() => setIsModalOpen(false)}></CreateProjectModal>
+            {/* Modals (CreateProject) */}
+            <CreateProjectModal
+                isOpen={isCreateProjectModalOpen}
+                closeModal={() => setIsCreateProjectModalOpen(false)}
+            />
         </section>
     )
 }

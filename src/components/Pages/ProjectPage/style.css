@@ -1,0 +1,127 @@
+.project {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.project-settings {
+    margin-bottom: 50px;
+    
+    height: 20%;
+}
+
+.project-settings-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    width: 60%;
+    min-width: 0;
+    height: 100px;
+}
+
+.project-settings-title h1,
+.project-settings-title p {
+    min-width: 0;
+    width: 100%;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.project-settings-title h1 {
+    font-size: 40px;
+    line-height: 1.2;
+}
+
+.project-settings-title p {
+    color: var(--text-description-color);
+    font-size: 20px;
+    line-height: 1.2;
+}
+
+.project-settings {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-top: 50px;
+
+    width: 100%;
+}
+
+.project-settings-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.projects-settings-button-create {
+    width: 140px;
+    height: 50px;
+
+    color: var(--button-text-color);
+
+    border: none;
+    border-radius: 10px;
+
+    background-color: var(--button-background-color);
+
+    cursor: pointer;
+}
+
+.projects-settings-button-settings {
+    width: 50px;
+    height: 50px;
+
+    color: var(--button-text-color);
+
+    border: none;
+    border-radius: 10px;
+
+    background-color: var(--button-background-color);
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.projects-settings-button-settings img {
+    filter: invert(100%);
+}
+
+.projects-selected-empty {
+    margin-top: 200px;
+
+    text-align: center;
+}
+
+@media (max-width: 764px) {
+    .project-settings {
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .project-settings-title {
+        text-align: center;
+
+        width: 110%;
+
+        height: auto;
+
+        margin-bottom: 10px;
+    }
+
+    .project-settings-title h1, p {
+        text-wrap: wrap;
+    }
+}

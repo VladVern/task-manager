@@ -11,12 +11,16 @@
     box-sizing: border-box;
 
     font-family: 'MainFont', sans-serif;
+
+    transition: background 0.3s ease;
 }
 
 html,
 body {
     margin: 0;
     padding: 0;
+
+    background-color: var(--background-color);
 }
 
 h1,
@@ -25,12 +29,15 @@ h3,
 h4,
 p {
     margin: 0;
+
+    color: var(--text-color);
 }
 
 ul,
 ol {
     margin: 0;
     padding: 0;
+
     list-style: none;
 }
 
@@ -43,10 +50,30 @@ select {
 
 button {
     border: 0;
+
     cursor: pointer;
 }
 
 img {
     display: block;
+
     max-width: 100%;
+
+    user-select: none;
+}
+
+.modal {
+    animation: modal-animation 0.25s ease;
+}
+
+@keyframes modal-animation {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -47%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
 }

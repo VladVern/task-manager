@@ -1,0 +1,7 @@
+export type Props = {
+    title: string,
+    buttonText: string
+    isOpen: boolean,
+    closeModal: () => void,
+    warningFunction: () => void
+}

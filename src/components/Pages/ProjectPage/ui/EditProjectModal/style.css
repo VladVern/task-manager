@@ -1,0 +1,91 @@
+.edit-project-modal {
+    position: fixed;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    z-index: 2;
+
+    width: min(450px, calc(100% - 30px));
+
+    background-color: var(--background-color);
+
+    border-radius: 22px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    gap: 20px;
+
+    padding-top: 50px;
+    padding-bottom: 30px;
+}
+
+.edit-project-modal img {
+    width: 40px;
+    height: 40px;
+
+    top: 10px;
+    right: 15px;
+
+    position: absolute;
+
+    cursor: pointer;
+    
+    filter: brightness(0) invert(var(--icon-invert));
+}
+
+.edit-project-modal-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+
+    width: 100%;
+}
+
+.edit-project-modal-form input {
+    width: 90%;
+    height: 48px;
+
+    padding: 0 16px;
+
+    color: var(--text-color);
+    background-color: var(--background-color);
+
+    border: 1.5px solid var(--input-border-color);
+    border-radius: 11px;
+
+    outline: none;
+
+    font-size: 14px;
+}
+
+.edit-project-modal-form button {
+    width: 140px;
+    height: 50px;
+
+    color: var(--button-text-color);
+
+    border: none;
+    border-radius: 10px;
+
+    background-color: var(--button-background-color);
+
+    cursor: pointer;
+
+    margin-top: 10px;
+}
+
+.edit-project-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+
+    background: var(--modal-background-color);
+}

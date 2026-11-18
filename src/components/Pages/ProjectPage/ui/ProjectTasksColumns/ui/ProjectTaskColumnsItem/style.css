@@ -1,12 +1,121 @@
 .task {
     padding: 15px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
+    margin-top: 15px;
+
+    border: 1px solid var(--list-item-border-color);
     border-radius: 8px;
+
     cursor: grab;
-    background: white;
+    
+    background-color: var(--list-item-background-color);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 90%;
+    min-width: 0;
+    
+    box-sizing: border-box;
+
+    touch-action: pan-y;
 }
 
 .task:active {
     cursor: grabbing;
+}
+
+.task-text {
+    flex: 1;
+
+    min-width: 0;
+}
+
+.task-text h1 {
+    line-height: 1.2;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    overflow: hidden;
+
+    max-width: 100%;
+
+    text-wrap: wrap;
+}
+
+.task-text p {
+    line-height: 1.2;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: var(--text-description-color);
+
+    overflow: hidden;
+
+    max-width: 100%;
+
+    padding-left: 3px;
+}
+
+[class*="task-text-priority-"] {
+    width: auto;
+
+    display: inline-block;
+
+    padding: 2px 8px;
+
+    border-radius: 6px;
+
+    margin-top: 5px;
+}
+
+.task-text-priority-low {
+    background-color: var(--priority-low-background-color);
+}
+
+.task-text-priority-low p {
+    color: var(--priority-low-text-color);
+    margin: 0;
+}
+
+.task-text-priority-medium {
+    background-color: var(--priority-medium-background-color);
+}
+.task-text-priority-medium p {
+    color: var(--priority-medium-text-color);
+    margin: 0;
+}
+
+.task-text-priority-high {
+    background-color: var(--priority-high-background-color);
+}
+
+.task-text-priority-high p {
+    color: var(--priority-high-text-color);
+    margin: 0;
+}
+
+.task-settings {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+
+    align-self: stretch;
+
+    flex-shrink: 0;
+}
+
+.task-settings button {
+    background: none;
+
+    flex-shrink: 0;
+}
+
+.task-settings img {
+    filter: brightness(0) invert(var(--icon-invert));
+    
+    width: 24px;
+    height: 24px;
+
+    flex-shrink: 0;
 }

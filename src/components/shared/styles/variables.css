@@ -1,18 +1,83 @@
 :root {
-    --button-background-color: #447566;
-    --button-text-color: #ffffff;
-
-    --button-delete-background-color: #5a1c07;
-
+    /* Main colors */
     --background-color: #ffffff;
-
-    --list-background-color: #e8eeee;
-    --list-text-name-color: #0d1b2a;
-    --list-text-description-color: #64748b;
-    --line-color: #00a896;
-
     --text-color: #000006;
+    --text-description-color: #64748b;
 
-    --error-background-color: #880c0c27;
-    --error-text-color: #810404;
+    --button-background-color: #447566;
+    --button-delete-background-color: #5a1c07;
+    --button-text-color: #ffffff;
+    --input-border-color: #cbd5e1;
+
+    --decoration-line-color: #00a896;
+    --separator-line-color: #445c7d83;
+
+    /* Toggle Switch */
+    --toggle-switch-background-color: #dce9e6;
+    --toggle-switch-dot-color: #447566;
+
+    /* List */
+    --list-background-color: #e8eeee;
+    --list-item-background-color: rgba(240, 244, 248, 1);
+    --list-item-border-color: rgba(69, 68, 68, 0.055);
+
+    /* Error */
+    --error-background-color: rgb(255, 85, 85);
+    --error-text-color: #eef6f4;
+
+    /* Modal */
+    --modal-background-color: rgba(0, 0, 0, 0.5);
+
+    /* Icon */
+    --icon-invert: 0;
+
+    /* Priority */
+    --priority-low-background-color: rgba(209, 250, 229, 0.8);
+    --priority-low-text-color: rgb(16, 150, 70);
+    --priority-medium-background-color: rgba(255, 235, 204, 0.6);
+    --priority-medium-text-color: rgb(245, 166, 35);
+    --priority-high-background-color: rgba(255, 204, 204, 0.4);
+    --priority-high-text-color: rgb(240, 71, 71);
+}
+
+:root[data-theme='dark'] {
+    /* Main colors */
+    --background-color: #0b1513;
+    --text-color: #eef6f4;
+    --text-description-color: #8fa6a1;
+
+    --button-background-color: #447566;
+    --button-delete-background-color: #5a1c07;
+    --button-text-color: #ffffff;
+    --input-border-color: #35504a;
+
+    --decoration-line-color: #00a896;
+    --separator-line-color: #2f4a44;
+
+    /* Toggle Switch */
+    --toggle-switch-background-color: #1d302c;
+    --toggle-switch-dot-color: #5f9484;
+
+    /* List */
+    --list-background-color: #15211e;
+    --list-item-background-color: #1f302c;
+    --list-item-border-color: rgba(255, 255, 255, 0.07);
+
+    /* Error */
+    --error-background-color: rgb(255, 85, 85);
+    --error-text-color: #eef6f4;
+
+    /* Modal */
+    --modal-background-color: rgba(3, 8, 7, 0.75);
+
+    /* Icon */
+    --icon-invert: 1;
+
+    /* Priority */
+    --priority-low-background-color: rgba(209, 250, 229, 0.8);
+    --priority-low-text-color: rgb(16, 150, 70);
+    --priority-medium-background-color: rgba(255, 235, 204, 0.6);
+    --priority-medium-text-color: rgb(245, 166, 35);
+    --priority-high-background-color: rgba(255, 204, 204, 0.4);
+    --priority-high-text-color: rgb(240, 71, 71);
 }

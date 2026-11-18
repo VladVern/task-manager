@@ -16,9 +16,24 @@
 }
 
 .projects-create-title {
-    color: var( --text-color);
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.projects-create-title h1 {
+    color: var(--text-color);
 
     font-size: 40px;
+}
+
+.projects-create-title p {
+    color: var(--text-description-color);
+
+    font-size: 20px;
+
+    padding-left: 2px;
 }
 
 .projects-create-button {
@@ -40,10 +55,32 @@
     align-items: center;
     justify-content: space-evenly;
     flex-wrap: wrap;
-
     gap: 10px;
 
     width: 80%;
 
     margin-top: 50px;
+}
+
+.projects-list-empty {
+    text-align: center;
+}
+
+@media (max-width: 440px) {
+    .projects-create {
+        flex-direction: column;
+    }
+
+    .projects-create-title {
+        display: flex;
+        align-items: center;
+    }
+
+    .projects-create-title p {
+        padding: 0;
+    }
+
+    .projects-create-button {
+        margin-top: 20px;
+    }
 }

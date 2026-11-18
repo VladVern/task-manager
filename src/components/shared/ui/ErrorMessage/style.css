@@ -1,24 +1,52 @@
 .error-message {
     padding: 10px;
     
-    position: absolute;
+    position: fixed;
     top: 80%;
-    left: 50%;
+    left: 50vw;
+    z-index: 10;
 
     transform: translate(-50%, -50%);
 
-    z-index: 5;
-
     background-color: var(--error-background-color);
 
-    border-radius: 10px;
+    border-radius: 5px;
 
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
+    flex-direction: row;
 }
 
-.error-message h1 {
-    color: var(--error-text-color)
+.error-message img {
+    filter: brightness(0) invert(1);
+
+    min-width: 24px;
+    min-height: 24px;
+}
+
+.error-message p {
+    color: var(--error-text-color);
+
+    margin-left: 2px;
+
+    text-wrap: nowrap;
+}
+
+.error-message button {
+    background: none;
+
+    margin-left: 10px;
+}
+
+@media (max-height: 410px) {
+    .error-message {
+        width: auto;
+    }
+}
+
+@media (max-height: 802px) {
+    .error-message {
+        top: 88%;
+    }
 }

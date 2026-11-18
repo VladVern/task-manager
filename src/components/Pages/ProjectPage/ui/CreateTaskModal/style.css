@@ -1,5 +1,5 @@
 .create-task-modal {
-    position: absolute;
+    position: fixed;
 
     top: 50%;
     left: 50%;
@@ -8,8 +8,7 @@
 
     z-index: 2;
 
-    width: 500px;
-    height: 650px;
+    width: min(450px, calc(100% - 30px));
 
     background-color: var(--background-color);
 
@@ -21,35 +20,94 @@
     flex-direction: column;
 
     gap: 20px;
+
+    padding-top: 50px;
+    padding-bottom: 30px;
 }
 
 .create-task-modal img {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
 
-    top: 0;
-    right: 0;
+    top: 10px;
+    right: 15px;
 
     position: absolute;
 
     cursor: pointer;
+
+    filter: brightness(0) invert(var(--icon-invert));
 }
 
-.create-task-modal label {
+.create-task-modal-form {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-
     gap: 20px;
+
+    width: 100%;
 }
 
-.create-task-modal label input {
-    width: 300px;
-    height: 40px;
+.create-task-modal-form input {
+    width: 90%;
+    height: 48px;
+
+    padding: 0 16px;
+
+    color: var(--text-color);
+    background-color: var(--background-color);
+
+    border: 1.5px solid var(--input-border-color);
+    border-radius: 11px;
+
+    outline: none;
+
+    font-size: 14px;
 }
 
-.create-task-modal label button {
+.create-task-modal-form select {
+    width: 90%;
+    height: 48px;
+
+    padding: 0 16px;
+
+    color: var(--text-color);
+    background-color: var(--background-color);
+
+    border: 1.5px solid var(--input-border-color);
+    border-radius: 11px;
+
+    outline: none;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.create-task-modal-form::after {
+    content: "";
+    
+    position: absolute;
+    right: 55px;
+    top: 66.8%;
+
+    width: 10px;
+    height: 10px;
+
+    border-right: 2px solid var(--text-color);
+    border-bottom: 2px solid var(--text-color);
+
+    transform: translateY(-75%) rotate(45deg);
+
+    pointer-events: none;
+}
+
+.create-task-modal-form button {
     width: 140px;
     height: 50px;
 
@@ -61,6 +119,8 @@
     background-color: var(--button-background-color);
 
     cursor: pointer;
+
+    margin-top: 10px;
 }
 
 .create-task-modal-overlay {
@@ -68,5 +128,5 @@
     inset: 0;
     z-index: 1;
 
-    background: rgba(0, 0, 0, 0.5);
+    background: var(--modal-background-color);
 }

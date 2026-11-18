@@ -1,0 +1,144 @@
+.warning-project-modal {
+    position: fixed;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    z-index: 2;
+
+    width: min(450px, calc(100% - 30px));
+
+    background-color: var(--background-color);
+
+    border-radius: 22px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    gap: 20px;
+
+    padding-top: 50px;
+    padding-bottom: 30px;
+}
+
+.warning-project-modal img {
+    width: 40px;
+    height: 40px;
+
+    top: 10px;
+    right: 15px;
+
+    position: absolute;
+
+    cursor: pointer;
+
+    filter: brightness(0) invert(var(--icon-invert));
+}
+
+.warning-project-modal-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+
+    padding-right: 126px;
+    padding-left: 50px;
+}
+
+.warning-project-modal-title h1 {
+    text-align: left;
+
+    width: 100%;
+}
+
+.warning-project-modal-title img {
+    width: 40px;
+    height: 40px;
+
+    position: static;
+
+    cursor: auto;
+
+    filter: invert(15%) sepia(100%) saturate(7000%) hue-rotate(0deg) brightness(100%) contrast(110%);
+}
+
+.warning-project-modal p {
+
+    padding-right: 40px;
+    padding-left: 50px;
+}
+
+.warning-project-modal-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+
+    margin-top: 10px;
+}
+
+.warning-project-modal-buttons button:nth-child(1) {
+    width: 140px;
+    height: 50px;
+
+    color: var(--button-text-color);
+
+    border: none;
+    border-radius: 10px;
+
+    background-color: var(--button-background-color);
+
+    cursor: pointer;
+}
+
+.warning-project-modal-buttons button:nth-child(2) {
+    width: 140px;
+    height: 50px;
+
+    color: var(--button-text-color);
+
+    border: none;
+    border-radius: 10px;
+
+    background-color: var(--button-background-color);
+
+    cursor: pointer;
+}
+
+.delete-project-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+
+    background: var(--modal-background-color);
+}
+
+@media (max-width: 400px) {
+    .warning-project-modal-title {
+        flex-direction: column;
+
+        padding: 0;
+    }
+
+    .warning-project-modal-title h1 {
+        text-align: center;
+        order: 2;
+    }
+
+    .warning-project-modal-title img {
+        order: 1;
+    }
+
+    .warning-project-modal p {
+        text-align: center;
+    }
+
+    .warning-project-modal-buttons {
+        flex-direction: column;
+    }
+}
