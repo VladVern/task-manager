@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate} from 'react-router'
+import { Routes, Route, Navigate } from 'react-router'
 
 import useProjectsState from '../components/shared/state/useProjectsState'
 
@@ -15,16 +15,18 @@ function App() {
     return (
         <>
             {/* Navigation menu + change theme */}
-            <section className='navigation'>
+            <header className='navigation'>
                 <NavigationMenu />
-            </section>
+            </header>
 
             {/* Rouute Pages */}
-            <Routes>
-                <Route path="/projects" element={<CreateProjectsPage />} />
-                <Route path="/projects/:projectName" element={<ProjectPage />} />
-                <Route path="*" element={<Navigate to="/projects/" />} />
-            </Routes>
+            <main>
+                <Routes>
+                    <Route path="/projects" element={<CreateProjectsPage />} />
+                    <Route path="/projects/:projectName" element={<ProjectPage />} />
+                    <Route path="*" element={<Navigate to="/projects/" />} />
+                </Routes>
+            </main>
 
             {/* Error message */}
             <ErrorMessage title={errorMessage} isActive={errorMessageIsActive} />
